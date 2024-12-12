@@ -1,5 +1,5 @@
 # **Laporan Proyek Machine Learning - Ridwan Setiawan**
-## **Domain Proyek**
+## **1. Domain Proyek**
 Prediksi dropout dan keberhasilan akademik mahasiswa adalah tantangan utama bagi institusi pendidikan tinggi di seluruh dunia. Dengan memahami faktor-faktor yang memengaruhi status akademik mahasiswa, institusi dapat melakukan intervensi dini untuk mengurangi tingkat putus kuliah dan mendukung keberhasilan akademik. Namun, salah satu hambatan terbesar dalam pengembangan model prediktif adalah ketidakseimbangan data, di mana kelas minoritas seperti mahasiswa dropout sering kali kurang terwakili, menyebabkan model bias terhadap kelas mayoritas seperti graduate atau enrolled.
 
 Untuk mengatasi masalah ini, pendekatan berbasis machine learning diterapkan dengan memanfaatkan data akademik, demografis, dan sosial ekonomi mahasiswa. Teknik seperti Synthetic Minority Over-sampling Technique (SMOTE) digunakan untuk menyeimbangkan data, sementara algoritma seperti Gradient Boosting, Random Forest, dan Support Vector Machine (SVM) dieksplorasi untuk menghasilkan model prediktif yang akurat. Pendekatan ini bertujuan untuk membantu institusi pendidikan tidak hanya dalam memprediksi hasil akademik tetapi juga dalam meningkatkan strategi intervensi yang efektif.
@@ -9,7 +9,7 @@ Untuk mengatasi masalah ini, pendekatan berbasis machine learning diterapkan den
 - Villar, A., de Andrade, C.R.V. *Supervised Machine Learning Algorithms for Predicting Student Dropout and Academic Success*. Discov Artif Intell 4, 2 (2024). https://doi.org/10.1007/s44163-023-00079-z.
 - Mduma, N. *Data Balancing Techniques for Predicting Student Dropout Using Machine Learning*. Data, 8(3), 49 (2023). https://doi.org/10.3390/data8030049.
 
-## **Business Understanding**
+## **2. Business Understanding**
 
 ### **Problem Statement**
 Institusi pendidikan tinggi menghadapi tantangan untuk mengurangi tingkat dropout mahasiswa. Mahasiswa dropout tidak hanya kehilangan kesempatan pendidikan, tetapi institusi juga menghadapi kerugian finansial dan reputasi. Pendekatan berbasis machine learning diperlukan untuk memprediksi status akademik mahasiswa dan melakukan intervensi dini secara efektif.
@@ -43,7 +43,7 @@ Institusi pendidikan tinggi menghadapi tantangan untuk mengurangi tingkat dropou
    - **Principal Component Analysis (PCA)** diterapkan untuk mengurangi jumlah fitur, meningkatkan efisiensi pemrosesan, dan meminimalkan risiko overfitting.
 
 Solusi ini bertujuan untuk memilih model terbaik yang tidak hanya akurat tetapi juga efisien dalam prediksi status akademik mahasiswa.
-## **Data Understanding**
+## **3. Data Understanding**
 
 ### **Deskripsi Dataset**
 Dataset ini mencakup data akademik, demografis, dan sosial ekonomi mahasiswa. Dataset memiliki **4,424 baris** dan **35 kolom**, dengan kolom target `Student Status` yang memiliki tiga kategori: Dropout (0), Enrolled (1), dan Graduate (2). Semua kolom dataset telah diubah menjadi numerik, kecuali untuk target yang di-encode menjadi kategori numerik.
@@ -203,7 +203,7 @@ Untuk memprediksi status akademik mahasiswa (`Student Status`), lima algoritma m
    - Proses ini menguji kombinasi parameter terbaik untuk setiap algoritma berdasarkan grid parameter tertentu.
 
 ### **Hasil pembelajaran**
-#### **Gradient Boosting**
+#### **- Gradient Boosting**
 
 - **Training Score**: 0.7550
 - **Test Score**: 0.7087
@@ -221,8 +221,6 @@ Untuk memprediksi status akademik mahasiswa (`Student Status`), lima algoritma m
   }
 
 ### **Kurva Pembelajaran**
-#### **Gradient Boosting**
-
 Gambar berikut menunjukkan **kurva pembelajaran untuk Gradient Boosting**, dengan skor pelatihan dan validasi pada berbagai ukuran data pelatihan:
 
 ![Kurva Pembelajaran Gradient Boosting](assets/7.1.png)
@@ -237,7 +235,7 @@ Gambar berikut menunjukkan **kurva pembelajaran untuk Gradient Boosting**, denga
   - Model Gradient Boosting membutuhkan data pelatihan yang cukup untuk mencapai generalisasi yang lebih baik.
   - Namun, meskipun model mengalami overfitting ringan, model tetap memberikan hasil yang baik dengan **Test Score** sebesar **0.7087**.
  
-#### **Random Forest**
+#### **- Random Forest**
 - **Training Score**: 0.7296
 - **Test Score**: 0.6897
 - **Waktu Pelatihan**: 32 detik
@@ -267,7 +265,7 @@ Gambar berikut menunjukkan **kurva pembelajaran untuk Random Forest**, dengan sk
   - Namun, skor validasi masih sedikit lebih rendah dibandingkan skor pelatihan, menunjukkan ruang untuk perbaikan lebih lanjut dalam optimasi model.
 
 
-#### **Logistic Regression**
+#### **- Logistic Regression**
 - **Training Score**: 0.7352
 - **Test Score**: 0.7352
 - **Waktu Pelatihan**: 4 detik
@@ -294,7 +292,7 @@ Gambar berikut menunjukkan **kurva pembelajaran untuk Logistic Regression**, den
 - **Kesimpulan**:
   - Logistic Regression adalah model yang stabil dan efektif untuk dataset ini, dengan performa prediksi yang cukup andal dan efisien.
 
-#### **Support Vector Machine (SVM)**
+#### **- Support Vector Machine (SVM)**
 - **Training Score**: 0.7265
 - **Test Score**: 0.7231
 - **Waktu Pelatihan**: 2 menit 46 detik
@@ -321,7 +319,7 @@ Gambar berikut menunjukkan **kurva pembelajaran untuk Support Vector Machine (SV
 - **Kesimpulan**:
   - SVM adalah model yang efektif untuk dataset ini, dengan performa yang seimbang dan stabil meskipun waktu pelatihannya relatif lebih lama dibandingkan model lainnya.
 
-#### **KNN**
+#### **- KNN**
 - **Training Score**: 0.7564
 - **Test Score**: 0.6539
 - **Waktu Pelatihan**: 5 detik
@@ -348,3 +346,44 @@ Gambar berikut menunjukkan **kurva pembelajaran untuk K-Nearest Neighbors (KNN)*
 - **Kesimpulan**:
   - Meskipun KNN mampu menangkap pola lokal, model ini cenderung sensitif terhadap outlier dan noise dalam dataset, yang mengurangi generalisasi pada data uji.
 
+### **Evaluasi Kinerja**
+Berdasarkan evaluasi yang dilakukan terhadap lima model machine learning yang diuji, yaitu Logistic Regression, K-Nearest Neighbors (KNN), Support Vector Machine (SVM), Random Forest, dan Gradient Boosting, model **Gradient Boosting** dinilai sebagai model terbaik untuk kasus prediksi status akademik mahasiswa ini. Berikut adalah alasan pemilihannya:
+
+**1. Kinerja Evaluasi**
+- **Test Score** tertinggi: Gradient Boosting mencapai skor uji sebesar **0.7087**, yang lebih tinggi dibandingkan model lainnya. Hal ini menunjukkan kemampuan model dalam memprediksi status akademik mahasiswa dengan akurasi yang baik pada data yang tidak terlihat.
+- Gradient Boosting menunjukkan peningkatan skor secara konsisten pada data pelatihan yang lebih besar, menunjukkan bahwa model ini mampu menangkap pola data yang kompleks.
+
+**2. Generalisasi yang Baik**
+- Meskipun menunjukkan sedikit **overfitting awal**, Gradient Boosting berhasil mencapai **konvergensi skor validasi dan pelatihan** yang lebih baik dibandingkan KNN, yang memiliki celah besar antara skor pelatihan dan validasi.
+- Model ini mampu mengatasi ketidakseimbangan data dengan lebih efektif berkat integrasi SMOTE dalam pipeline, sehingga memberikan hasil yang lebih representatif untuk semua kelas target.
+
+**3. Fleksibilitas dan Ketahanan**
+- Gradient Boosting memiliki fleksibilitas tinggi dalam menangani berbagai jenis data dan interaksi antar fitur. Dengan tuning hyperparameter, model ini menunjukkan performa yang stabil bahkan pada dataset yang memiliki korelasi tinggi antar fitur.
+
+**4. Efisiensi Relatif**
+- Waktu pelatihan Gradient Boosting yang berada di kisaran **4 menit 51 detik** relatif sebanding dengan kompleksitas dan performa yang dihasilkan. Sementara itu, model seperti SVM memerlukan waktu pelatihan lebih lama tanpa memberikan peningkatan signifikan pada skor uji.
+
+## **6. Evaluation**
+
+### **Metrik Evaluasi yang Digunakan**
+Dalam proyek ini, evaluasi model dilakukan menggunakan metrik berikut:
+1. **Training Score**: Mengukur akurasi model pada data pelatihan untuk menilai sejauh mana model dapat mempelajari pola dari data.
+2. **Test Score**: Mengukur performa model pada data uji untuk mengevaluasi kemampuan generalisasi model pada data yang tidak terlihat.
+3. **Waktu Pelatihan**: Waktu yang dibutuhkan untuk melatih model, yang mencerminkan efisiensi pemrosesan.
+4. **Parameter Terbaik**: Parameter hyperparameter yang menghasilkan performa optimal dari hasil tuning.
+
+### **Hasil Evaluasi Model**
+Berikut adalah hasil evaluasi dari lima model yang diuji:
+| **Model**             | **Training Score** | **Test Score** | **Waktu Pelatihan** | **Parameter Terbaik**                                                                 |
+|------------------------|--------------------|----------------|----------------------|---------------------------------------------------------------------------------------|
+| Gradient Boosting      | 0.7550            | 0.7087         | 4 menit 51 detik     | `{'validation_fraction': 0.2, 'tol': 0.0001, 'subsample': 1.0, 'n_iter_no_change': 20,` <br> `'n_estimators': 150, 'max_depth': 4, 'learning_rate': 0.01}` |
+| Random Forest          | 0.7296            | 0.6897         | 32 detik             | `{'n_estimators': 125, 'min_samples_split': 6, 'min_samples_leaf': 2,` <br> `'max_features': 'log2', 'max_depth': 4}`                                    |
+| Logistic Regression    | 0.7352            | 0.7352         | 4 detik              | `{'solver': 'liblinear', 'penalty': 'l2', 'C': 0.05}`                                                                   |
+| Support Vector Machine | 0.7265            | 0.7231         | 2 menit 46 detik     | `{'C': 0.8668695797323276, 'kernel': 'linear'}`                                                                          |
+| K-Nearest Neighbors    | 0.7564            | 0.6539         | 5 detik              | `{'n_neighbors': 9, 'weights': 'uniform'}`                                                                               |
+
+### **Kesimpulan Hasil Evaluasi**
+- **Model Gradient Boosting** menunjukkan performa terbaik dengan **Test Score** tertinggi (0.7087) dan keseimbangan yang baik antara akurasi pelatihan dan uji.
+- **Logistic Regression** memiliki waktu pelatihan tercepat, dengan **Test Score** yang cukup baik (0.7352), tetapi model ini kurang fleksibel dalam menangani hubungan non-linear.
+- **Support Vector Machine (SVM)** memberikan hasil yang stabil tetapi memerlukan waktu pelatihan yang lebih lama dibandingkan model lainnya.
+- **Random Forest** dan **KNN** menunjukkan performa yang lebih rendah dalam generalisasi pada data uji, meskipun cukup baik pada data pelatihan.
