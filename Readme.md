@@ -1,4 +1,139 @@
 # **Laporan Proyek Machine Learning - Ridwan Setiawan**
+## **Domain Proyek**
+Prediksi dropout dan keberhasilan akademik mahasiswa adalah tantangan utama bagi institusi pendidikan tinggi di seluruh dunia. Dengan memahami faktor-faktor yang memengaruhi status akademik mahasiswa, institusi dapat melakukan intervensi dini untuk mengurangi tingkat putus kuliah dan mendukung keberhasilan akademik. Namun, salah satu hambatan terbesar dalam pengembangan model prediktif adalah ketidakseimbangan data, di mana kelas minoritas seperti mahasiswa dropout sering kali kurang terwakili, menyebabkan model bias terhadap kelas mayoritas seperti graduate atau enrolled.
+
+Untuk mengatasi masalah ini, pendekatan berbasis machine learning diterapkan dengan memanfaatkan data akademik, demografis, dan sosial ekonomi mahasiswa. Teknik seperti Synthetic Minority Over-sampling Technique (SMOTE) digunakan untuk menyeimbangkan data, sementara algoritma seperti Gradient Boosting, Random Forest, dan Support Vector Machine (SVM) dieksplorasi untuk menghasilkan model prediktif yang akurat. Pendekatan ini bertujuan untuk membantu institusi pendidikan tidak hanya dalam memprediksi hasil akademik tetapi juga dalam meningkatkan strategi intervensi yang efektif.
+
+### **Referensi**
+- Martins, M.V., Tolledo, D., Machado, J., Baptista, L.M.T., Realinho, V. (2021). *Early Prediction of Student’s Performance in Higher Education: A Case Study*. In: Rocha, Á., Adeli, H., Dzemyda, G., Moreira, F., Ramalho Correia, A.M. (eds) Trends and Applications in Information Systems and Technologies. WorldCIST 2021. Advances in Intelligent Systems and Computing, vol 1365. Springer, Cham. https://doi.org/10.1007/978-3-030-72657-7_16.
+- Villar, A., de Andrade, C.R.V. *Supervised Machine Learning Algorithms for Predicting Student Dropout and Academic Success*. Discov Artif Intell 4, 2 (2024). https://doi.org/10.1007/s44163-023-00079-z.
+- Mduma, N. *Data Balancing Techniques for Predicting Student Dropout Using Machine Learning*. Data, 8(3), 49 (2023). https://doi.org/10.3390/data8030049.
+
+## **Business Understanding**
+
+### **Problem Statement**
+Institusi pendidikan tinggi menghadapi tantangan untuk mengurangi tingkat dropout mahasiswa. Mahasiswa dropout tidak hanya kehilangan kesempatan pendidikan, tetapi institusi juga menghadapi kerugian finansial dan reputasi. Pendekatan berbasis machine learning diperlukan untuk memprediksi status akademik mahasiswa dan melakukan intervensi dini secara efektif.
+
+### **Goals**
+1. Mengembangkan model machine learning untuk memprediksi status akademik mahasiswa (Dropout, Enrolled, Graduate).
+2. Mengidentifikasi model terbaik berdasarkan kinerja evaluasi dan efisiensi.
+3. Mengurangi dimensi data untuk meningkatkan efisiensi pemrosesan dan mengurangi risiko overfitting.
+
+### **Solution Statement**
+1. **Algoritma yang Digunakan**:
+   - Logistic Regression
+   - K-Nearest Neighbors (KNN)
+   - Support Vector Machine (SVM)
+   - Random Forest
+   - Gradient Boosting
+
+   Model terbaik dipilih berdasarkan kinerja evaluasi pada data uji.
+
+2. **Hyperparameter Tuning**:
+   - Menggunakan **RandomizedSearchCV** untuk mengoptimalkan hyperparameter pada setiap algoritma.
+
+3. **Evaluasi Model**:
+   - Model dievaluasi berdasarkan metrik berikut:
+     - **Training Score**: Mengukur akurasi model pada data pelatihan.
+     - **Test Score**: Mengukur performa model pada data uji.
+     - **Waktu Pelatihan**: Menilai efisiensi pelatihan model.
+     - **Parameter Terbaik**: Hasil dari RandomizedSearchCV untuk memastikan performa optimal.
+
+4. **Reduksi Dimensi dengan PCA**:
+   - **Principal Component Analysis (PCA)** diterapkan untuk mengurangi jumlah fitur, meningkatkan efisiensi pemrosesan, dan meminimalkan risiko overfitting.
+
+Solusi ini bertujuan untuk memilih model terbaik yang tidak hanya akurat tetapi juga efisien dalam prediksi status akademik mahasiswa.
+## **3. Data Understanding**
+
+### **Deskripsi Dataset**
+Dataset ini mencakup data akademik, demografis, dan sosial ekonomi mahasiswa. Dataset memiliki **4,424 baris** dan **35 kolom**, dengan kolom target `Student Status` yang memiliki tiga kategori: Dropout (0), Enrolled (1), dan Graduate (2). Semua kolom dataset telah diubah menjadi numerik, kecuali untuk target yang di-encode menjadi kategori numerik.
+
+### **Kondisi Data**
+1. **Jumlah Baris dan Kolom**: Dataset terdiri dari 4,424 baris dan 35 kolom.
+2. **Missing Value**: Tidak ada nilai yang hilang pada dataset.
+3. **Duplikat**: Tidak ditemukan data duplikat.
+4. **Outlier**: Outlier pada fitur numerik diidentifikasi melalui distribusi data, seperti `Age at Enrollment` dan `Curricular Units`.
+
+### **Tautan Sumber Data**
+Dataset diunduh dari UCI Machine Learning Repository:  
+- **Judul Dataset**: Predict Students' Dropout and Academic Success  
+- **Link Dataset**: [Predict Students' Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)
+
+### **Informasi Fitur Dataset**
+Berikut adalah informasi lengkap mengenai kolom dalam dataset:
+
+| **Kolom**                                | **Tipe Data** | **Jumlah Data** | **Duplikat** | **Missing Value** | **Keterangan (Deskripsi dalam Bahasa Indonesia)**             |
+|------------------------------------------|---------------|-----------------|--------------|-------------------|----------------------------------------------------------------|
+| `Marital Status`                         | integer       | 4,424           | 0            | 0                 | Status perkawinan mahasiswa                                    |
+| `Application Mode`                       | integer       | 4,424           | 0            | 0                 | Metode pendaftaran mahasiswa                                  |
+| `Application Order`                      | integer       | 4,424           | 0            | 0                 | Urutan aplikasi mahasiswa                                      |
+| `Course`                                 | integer       | 4,424           | 0            | 0                 | Program studi mahasiswa                                        |
+| `Daytime/Evening Attendance`             | integer       | 4,424           | 0            | 0                 | Kehadiran mahasiswa (pagi/malam)                              |
+| `Previous Qualification`                 | integer       | 4,424           | 0            | 0                 | Kualifikasi pendidikan sebelumnya                             |
+| `Nationality`                            | integer       | 4,424           | 0            | 0                 | Kebangsaan mahasiswa                                          |
+| `Mother's Qualification`                 | integer       | 4,424           | 0            | 0                 | Kualifikasi pendidikan ibu mahasiswa                          |
+| `Father's Qualification`                 | integer       | 4,424           | 0            | 0                 | Kualifikasi pendidikan ayah mahasiswa                         |
+| `Mother's Occupation`                    | integer       | 4,424           | 0            | 0                 | Pekerjaan ibu mahasiswa                                       |
+| `Father's Occupation`                    | integer       | 4,424           | 0            | 0                 | Pekerjaan ayah mahasiswa                                      |
+| `Displaced`                              | integer       | 4,424           | 0            | 0                 | Status merantau mahasiswa                                     |
+| `Educational Special Needs`              | integer       | 4,424           | 0            | 0                 | Kebutuhan khusus pendidikan                                   |
+| `Debtor`                                 | integer       | 4,424           | 0            | 0                 | Status mahasiswa sebagai penunggak pembayaran                |
+| `Tuition Fees Up To Date`                | integer       | 4,424           | 0            | 0                 | Pembayaran uang kuliah tepat waktu                            |
+| `Gender`                                 | integer       | 4,424           | 0            | 0                 | Jenis kelamin mahasiswa                                       |
+| `Scholarship Holder`                     | integer       | 4,424           | 0            | 0                 | Status mahasiswa sebagai penerima beasiswa                   |
+| `Age at Enrollment`                      | integer       | 4,424           | 0            | 0                 | Usia mahasiswa saat mendaftar                                 |
+| `International`                          | integer       | 4,424           | 0            | 0                 | Status mahasiswa internasional                                |
+| `Curricular Units 1st Sem (Credited)`    | integer       | 4,424           | 0            | 0                 | Jumlah mata kuliah disetujui di semester pertama              |
+| `Curricular Units 1st Sem (Enrolled)`    | integer       | 4,424           | 0            | 0                 | Jumlah mata kuliah yang diambil di semester pertama           |
+| `Curricular Units 1st Sem (Evaluations)` | integer       | 4,424           | 0            | 0                 | Jumlah evaluasi mata kuliah di semester pertama               |
+| `Curricular Units 1st Sem (Approved)`    | integer       | 4,424           | 0            | 0                 | Jumlah mata kuliah lulus di semester pertama                  |
+| `Curricular Units 1st Sem (Grade)`       | float         | 4,424           | 0            | 0                 | Nilai rata-rata mata kuliah di semester pertama               |
+| `Curricular Units 2nd Sem (Credited)`    | integer       | 4,424           | 0            | 0                 | Jumlah mata kuliah disetujui di semester kedua                |
+| `Curricular Units 2nd Sem (Enrolled)`    | integer       | 4,424           | 0            | 0                 | Jumlah mata kuliah yang diambil di semester kedua             |
+| `Curricular Units 2nd Sem (Evaluations)` | integer       | 4,424           | 0            | 0                 | Jumlah evaluasi mata kuliah di semester kedua                 |
+| `Curricular Units 2nd Sem (Approved)`    | integer       | 4,424           | 0            | 0                 | Jumlah mata kuliah lulus di semester kedua                    |
+| `Curricular Units 2nd Sem (Grade)`       | float         | 4,424           | 0            | 0                 | Nilai rata-rata mata kuliah di semester kedua                 |
+| `Unemployment Rate`                      | float         | 4,424           | 0            | 0                 | Tingkat pengangguran di daerah mahasiswa                      |
+| `Inflation Rate`                         | float         | 4,424           | 0            | 0                 | Tingkat inflasi di daerah mahasiswa                           |
+| `GDP`                                    | float         | 4,424           | 0            | 0                 | Produk Domestik Bruto di daerah mahasiswa                     |
+| `Student Status`                         | integer       | 4,424           | 0            | 0                 | Status mahasiswa: Dropout (0), Enrolled (1), Graduate (2)     |
+
+**Status Tabel**
+
+Dataset ini telah diperiksa untuk **missing value**, **duplikasi**, dan **outlier**. Tidak ditemukan data yang hilang atau duplikat, dan fitur numerik telah dianalisis untuk outlier menggunakan distribusi statistik. Dataset ini siap untuk digunakan dalam proses machine learning dengan sedikit preprocessing tambahan, seperti reduksi dimensi menggunakan PCA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+____________________________________________________________________
+
+
+
+
+
 
 ## Domain Proyek
 
