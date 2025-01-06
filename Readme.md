@@ -63,7 +63,7 @@ Distribusi kelas target `Student Status` menunjukkan bahwa dataset ini tidak sei
 
 Visualisasi distribusi kelas dapat dilihat pada diagram berikut:
 
-![Distribusi Kelas Target](assets/download.png)
+![Distribusi Kelas Target](assets/7.6.png)
 
 ### **Tautan Sumber Data**
 Dataset diunduh dari UCI Machine Learning Repository:  
