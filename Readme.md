@@ -214,7 +214,7 @@ Untuk memprediksi status akademik mahasiswa (`Student Status`), lima algoritma m
       Dataset awal menunjukkan ketidakseimbangan jumlah data pada masing-masing kelas:
       Gambar berikut menunjukkan **Jumlah Data sebelum dan sesudah dilakukan SMOTE**:
 
-      ![Distribusi data sebelum dan sesudah SMOTE](Screenshot 2025-01-06 114125.png)
+      ![Distribusi data sebelum dan sesudah SMOTE](assets/7.7.png)
   
    
 2. **RandomizedSearchCV untuk Hyperparameter Tuning**  
