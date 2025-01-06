@@ -126,8 +126,7 @@ Dataset ini telah diperiksa untuk **missing value**, **duplikasi**, dan **outlie
      - **Graduate**: 2  
    - Konversi ini memastikan algoritma machine learning dapat memproses target secara langsung.
 
-   ![Distribusi Target Setelah Konversi](assets/5.1.png)
-
+   
 3. **Analisis Korelasi dengan Spearman**  
    - Korelasi Spearman digunakan untuk mengukur hubungan antar fitur dalam dataset, khususnya dengan target `Student Status`.
    - Berdasarkan analisis, fitur dengan korelasi rendah terhadap target `Student Status` (< 0.1) dianggap kurang relevan untuk proses pemodelan.
@@ -194,10 +193,30 @@ Untuk memprediksi status akademik mahasiswa (`Student Status`), lima algoritma m
 5. **Gradient Boosting**
 
 ### **Teknik yang Digunakan**
-1. **Synthetic Minority Over-sampling Technique (SMOTE)**  
-   - Karena dataset tidak seimbang, **SMOTE** diterapkan untuk membuat data sintetis bagi kelas minoritas (Dropout dan Enrolled) sehingga distribusi kelas menjadi lebih seimbang.
-   - SMOTE diterapkan dalam pipeline untuk mengintegrasikan proses penyeimbangan data dengan pemodelan.
+1. **Synthetic Minority Over-sampling Technique (SMOTE)**
 
+   SMOTE (**Synthetic Minority Oversampling Technique**) adalah metode yang digunakan untuk menangani ketidakseimbangan kelas dalam dataset. Ketidakseimbangan kelas terjadi ketika jumlah data di satu atau lebih kelas jauh lebih sedikit dibandingkan kelas lainnya, yang dapat menyebabkan model bias terhadap kelas mayoritas.
+
+   #### **Cara Kerja SMOTE**
+   SMOTE bekerja dengan cara:
+   1). **Memilih secara acak data dari kelas minoritas.**
+   2). **Menentukan tetangga terdekat** dari data tersebut menggunakan algoritma K-Nearest Neighbors (KNN).
+   3). **Menginterpolasi nilai-nilai baru** antara data yang dipilih dan tetangga terdekatnya untuk membuat data sintetis. 
+      - Misalnya, jika data awal memiliki nilai fitur \([x_1, x_2]\) dan tetangganya adalah \([y_1, y_2]\), maka SMOTE akan menciptakan titik data baru di antara dua titik ini dengan formula:
+        \[
+        x_{\text{baru}} = x_1 + \lambda (y_1 - x_1), \quad x_2 + \lambda (y_2 - x_2)
+        \]
+        di mana \( \lambda \) adalah nilai acak antara 0 dan 1.
+
+   Dengan pendekatan ini, SMOTE tidak hanya menambah jumlah data, tetapi juga memperluas distribusi kelas minoritas di ruang fitur.
+
+   #### **Distribusi Data Sebelum SMOTE**
+      Dataset awal menunjukkan ketidakseimbangan jumlah data pada masing-masing kelas:
+      Gambar berikut menunjukkan **Jumlah Data sebelum dan sesudah dilakukan SMOTE**:
+
+      ![Distribusi data sebelum dan sesudah SMOTE](assets/7.1.png)
+  
+   
 2. **RandomizedSearchCV untuk Hyperparameter Tuning**  
    - Untuk mengoptimalkan kinerja model, **RandomizedSearchCV** digunakan untuk melakukan tuning hyperparameter secara efisien.
    - Proses ini menguji kombinasi parameter terbaik untuk setiap algoritma berdasarkan grid parameter tertentu.
